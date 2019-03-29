@@ -14,3 +14,17 @@ SELECT ?z WHERE {
     } as ?z)
 }
 ```
+
+---
+ 
+
+__Is input flow $x$ required for activity $y$?__
+ 
+```
+Select ?z where {
+    bind (exists{
+        x b:inputOf y;
+        b:determiningFlow y
+    } as ?z)
+}
+```

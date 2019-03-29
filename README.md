@@ -129,7 +129,7 @@ Are we still handling stocks? Not sure how to query this as stocks was mentioned
 
 __What is the direct input flow of flow-object F to activity A measured by flow-property P in location L in the time period T under macro-economic scenario S?__
  
-I think flow-property here is redundant since we already standardized the units. So I’m removing it from the query itself. Still need to consider convertion.
+I think flow-property here is redundant since we already standardized the units. So I’m removing it from the query itself. Still need to consider convertion. Don't know how to ask the about the macro-economic scenario though.
 
 ```sparql
 PREFIX b: <http://ontology.bonsai.uno/core#>
@@ -156,7 +156,7 @@ GROUP BY ?u
 
 __What is the direct output flow of flow-object F from activity A measured by flow-property P in location L in the time period T under macro-economic scenario S?__
  
-Same comments as above. Also similar query with only the input changed to the output
+Same comments as above. Also similar query with only the input changed to the output.
 
 ```sparql
 PREFIX b: <http://ontology.bonsai.uno/core#>

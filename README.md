@@ -107,7 +107,7 @@ SELECT ?x ?unit WHERE {
 
 __Does the input and output of flow objects follow mass balance?__
  
-I’m assuming this flow objects mass balance is from flows. Also, this only works for same unit scales. Sorry,
+I’m assuming this flow objects mass balance is from flows. Also, this only works for same unit scales.
 
 ```
 TBD
@@ -130,6 +130,10 @@ __What is the direct input flow of flow-object F to activity A measured by flow-
 I think flow-property here is redundant since we already standardized the units. So I’m removing it from the query itself. Still need to consider convertion.
 
 ```sparql
+PREFIX b: <http://ontology.bonsai.uno/core#>
+PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
 SELECT sum(?v) WHERE {
     ?i a flow;
        om:hasValue ?v;

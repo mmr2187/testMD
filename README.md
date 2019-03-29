@@ -25,7 +25,7 @@ __Is input flow $x$ required for activity $y$?__
 ```sparql
 PREFIX b: <http://ontology.bonsai.uno/core#>
 
-Select ?z where {
+SELECT ?z WHERE {
     bind (exists{
         x b:inputOf y;
         b:determiningFlow y
@@ -43,7 +43,7 @@ I think $y$ here would be expressed as a lower $low$ bound and an upper $up$ bou
 PREFIX b: <http://ontology.bonsai.uno/core#>
 PREFIX time: <http://www.w3.org/2006/time#>
 
-Select ?x where {
+SELECT ?x WHERE {
     ?x a b:flow;
        b:flowOf ?z;
        b:hasTemporalExtent ?y.
@@ -61,9 +61,28 @@ __What is the location of the agent performing the activity $y$?__
 ```sparql
 PREFIX b: <http://ontology.bonsai.uno/core#>
 
-Select ?a ?loc where {
+SELECT ?a ?loc WHERE {
     ?a b:performs y;
        a agent;
        b:location ?loc
+}
+```
+
+---
+
+__What other agents performing the same type of activity of agent $z$ are present in the same location $w$?__
+ 
+The other agents I called $a$ and here z is a constant instead of a variable in sparql so I’ll leave it as a z. I also removed z from the result set since this is a given.
+
+```
+PREFIX b: <http://ontology.bonsai.uno/core#>
+
+SELECT ?a WHERE {
+    z a b:agent;
+      b:performs ?w;
+      b:location ?l.
+    ?y b:performs ?w;
+       b:location ?l.
+    MINUS { z }
 }
 ```

@@ -74,7 +74,7 @@ __What other agents performing the same type of activity of agent $z$ are presen
  
 The other agents I called $a$ and here z is a constant instead of a variable in sparql so I’ll leave it as a z. I also removed z from the result set since this is a given.
 
-```
+```sparql
 PREFIX b: <http://ontology.bonsai.uno/core#>
 
 SELECT ?a WHERE {
@@ -91,7 +91,7 @@ SELECT ?a WHERE {
  
 __How are the flow objects quantified? / Which units of measure are used?__
 
-```
+```sparql
 PREFIX b: <http://ontology.bonsai.uno/core#>
 PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/>
 
@@ -101,4 +101,47 @@ SELECT ?x ?unit WHERE {
        b:objectType ?x;
        om:hasUnit ?unit
 }
+```
+
+---
+
+__Does the input and output of flow objects follow mass balance?__
+ 
+I’m assuming this flow objects mass balance is from flows. Also, this only works for same unit scales. Sorry,
+
+```
+TBD
+```
+
+---
+
+Further, balance checks on ALL flows of a specific flow-object across all activities, requires a more complete database.
+
+---
+ 
+__Is output flow required for activity of type 'stock'?__
+ 
+Are we still handling stocks? Not sure how to query this as stocks was mentioned to be outside the ontology.
+ 
+---
+
+__What is the direct input flow of flow-object F to activity A measured by flow-property P in location L in the time period T under macro-economic scenario S?__
+ 
+I think flow-property here is redundant since we already standardized the units. So I’m removing it from the query itself. Still need to consider convertion.
+
+```sparql
+SELECT sum(?v) WHERE {
+    ?i a flow;
+       om:hasValue ?v;
+       b:objectType ?f;
+       b:inputOf ?a;
+       om:hasUnit ?u.
+    ?a a activity;
+       b:location l;
+       b:hasTemporalExtent ?t.
+    ?t a time:ProperInterval;
+       time:hasBeginning low;
+       time:hasEnd up
+}
+GROUP BY ?u
 ```

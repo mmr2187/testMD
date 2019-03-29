@@ -8,9 +8,9 @@ Since flow here is a product, I translated it into flow-object. Also, I reread a
 
 ```sparql
 SELECT ?z WHERE {
-bind ( exists{
-x b:outputOf y;
-  b:determiningFlow y
-} as ?z)
+    bind ( exists{
+        x b:outputOf y;
+        b:determiningFlow y
+    } as ?z)
 }
 ```

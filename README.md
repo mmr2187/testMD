@@ -86,3 +86,19 @@ SELECT ?a WHERE {
     MINUS { z }
 }
 ```
+
+---
+ 
+__How are the flow objects quantified? / Which units of measure are used?__
+
+```
+PREFIX b: <http://ontology.bonsai.uno/core#>
+PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/>
+
+SELECT ?x ?unit WHERE {
+    ?x a b:flowObject.
+    ?z a b:flow;
+       b:objectType ?x;
+       om:hasUnit ?unit
+}
+```

@@ -115,7 +115,9 @@ TBD
 
 ---
 
-Further, balance checks on ALL flows of a specific flow-object across all activities, requires a more complete database.
+__Further, balance checks on ALL flows of a specific flow-object across all activities, requires a more complete database.__
+
+Similar question to above except we're looking into all flows into all activities.
 
 ---
  
@@ -139,6 +141,33 @@ SELECT sum(?v) WHERE {
        om:hasValue ?v;
        b:objectType ?f;
        b:inputOf ?a;
+       om:hasUnit ?u.
+    ?a a activity;
+       b:location l;
+       b:hasTemporalExtent ?t.
+    ?t a time:ProperInterval;
+       time:hasBeginning low;
+       time:hasEnd up
+}
+GROUP BY ?u
+```
+
+---
+
+__What is the direct output flow of flow-object F from activity A measured by flow-property P in location L in the time period T under macro-economic scenario S?__
+ 
+Same comments as above. Also similar query with only the input changed to the output
+
+```sparql
+PREFIX b: <http://ontology.bonsai.uno/core#>
+PREFIX om: <http://www.ontology-of-units-of-measure.org/resource/om-2/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+SELECT sum(?v) WHERE {
+    ?i a flow;
+       om:hasValue ?v;
+       b:objectType ?f;
+       b:outputOf ?a;
        om:hasUnit ?u.
     ?a a activity;
        b:location l;

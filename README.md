@@ -53,3 +53,17 @@ Select ?x where {
        a time:ProperInterval
 }
 ```
+
+---
+
+__What is the location of the agent performing the activity $y$?__
+
+```sparql
+PREFIX b: <http://ontology.bonsai.uno/core#>
+
+Select ?a ?loc where {
+    ?a b:performs y;
+       a agent;
+       b:location ?loc
+}
+```
